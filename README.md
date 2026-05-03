@@ -68,7 +68,8 @@ POST /classify {complaint_text}
 |----------|--------|-------------|
 | `/classify` | POST | Classify complaint, return full ClassificationResult |
 | `/ingest` | POST | Trigger background FCC dataset ingestion |
-| `/evaluate` | GET | Run RAGAS evaluation suite |
+| `/evaluate` | POST | Trigger async RAGAS eval job, returns `{ job_id }` |
+| `/evaluate/{job_id}` | GET | Poll job status + metrics when complete |
 | `/health` | GET | Check ChromaDB, Supabase, OpenAI connectivity |
 
 ## Data Source

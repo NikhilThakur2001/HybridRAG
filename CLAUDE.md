@@ -65,9 +65,25 @@ class ClassificationResult(BaseModel):
 ## API Endpoints
 
 - `POST /classify` — main endpoint for agent dashboard
-- `POST /ingest` — one-time FCC dataset ingestion trigger
-- `GET /evaluate` — RAGAS evaluation suite
+- `POST /ingest` — one-time FCC dataset ingestion trigger (background task)
+- `POST /evaluate` — triggers async RAGAS eval job, returns `{ job_id }`
+- `GET /evaluate/{job_id}` — poll job status + results when done
 - `GET /health` — connectivity check (ChromaDB, Supabase, OpenAI)
+
+### Async Evaluate Job Response
+```json
+{
+  "job_id": "uuid",
+  "status": "pending | running | complete | failed",
+  "results": {
+    "faithfulness": 0.87,
+    "context_recall": 0.79,
+    "answer_relevance": 0.91,
+    "num_samples": 50,
+    "duration_seconds": 142
+  }
+}
+```
 
 ## Key Implementation Notes
 
