@@ -46,11 +46,12 @@ class PaymentCategory(str, Enum):
     REFUND_DELAYED = "REFUND_DELAYED"
     UNAUTHORIZED_TRANSACTION = "UNAUTHORIZED_TRANSACTION"
     CHARGEBACK_DISPUTE = "CHARGEBACK_DISPUTE"
-    OTP_FAILURE = "OTP_FAILURE"
     ACCOUNT_BLOCKED = "ACCOUNT_BLOCKED"
     SETTLEMENT_DELAY = "SETTLEMENT_DELAY"
     WRONG_DEDUCTION = "WRONG_DEDUCTION"
 ```
+
+OTP_FAILURE dropped — no clean CFPB mapping. Labels derived entirely from CFPB Issue column (zero cost, zero generation).
 
 ## Pydantic Output Schema
 
