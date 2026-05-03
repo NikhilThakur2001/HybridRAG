@@ -1,3 +1,6 @@
+# This script reads the zipped CSV file, filters for telecom-related complaints with narratives, 
+# and saves the result as a parquet file.
+
 import pandas as pd
 import time
 
@@ -42,7 +45,7 @@ for chunk in pd.read_csv(
         ) &
         chunk["Consumer complaint narrative"].notna()
     ]
-    
+
     matched_rows += len(filtered)
     chunks.append(filtered)
 
