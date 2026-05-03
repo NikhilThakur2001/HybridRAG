@@ -89,12 +89,10 @@ if __name__ == "__main__":
 
     # Cap at 30K per category to prevent retrieval bias
     CAP = 30_000
-    capped = (
-        labeled
-        .groupby("label", group_keys=False)
-        .apply(lambda x: x.sample(min(len(x), CAP), random_state=42))
-        .reset_index(drop=True)
-    )
+    capped = pd.concat([
+        group.sample(min(len(group), CAP), random_state=42)
+        for _, group in labeled.groupby("label")
+    ]).reset_index(drop=True)
 
     print(f"\nLabel distribution (post-cap at {CAP:,}):")
     print(capped["label"].value_counts())
